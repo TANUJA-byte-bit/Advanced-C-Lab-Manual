@@ -15,34 +15,38 @@ Else
 6.	Return 0
  
 Program:
-```c
+```
 #include <stdio.h>
 
-struct eligible
-{
+// Define the structure to hold person details
+struct eligible {
+    char n[50]; 
     int age;
-    char n[50];
 };
 
-int main()
-{
-    struct eligible e;
+int main() {
+    int num, i;
 
-    printf("Enter Name: ");
-    scanf("%s", e.n);
-
-    printf("Enter Age: ");
-    scanf("%d", &e.age);
-
-    if(e.age <= 6)
-    {
-        printf("Vaccine Eligibility: No");
+    printf("Enter the number of persons: ");
+    scanf("%d", &num);
+    struct eligible e[num];
+    for (i = 0; i < num; i++) {
+        printf("\nEnter details for person %d:\n", i + 1);
+        printf("Enter Name: ");
+        scanf("%s", e[i].n);
+        printf("Enter Age: ");
+        scanf("%d", &e[i].age);
     }
-    else
-    {
-        printf("Vaccine Eligibility: Yes\n");
-        printf("Name: %s\n", e.n);
-        printf("Age: %d", e.age);
+    printf("\n--- Vaccine Eligibility Results ---\n");
+    for (i = 0; i < num; i++) {
+        printf("\nName: %s\n", e[i].n);
+        printf("Age: %d\n", e[i].age);
+
+        if (e[i].age <= 6) {
+            printf("Vaccine Eligibility: No\n");
+        } else {
+            printf("Vaccine Eligibility: Yes\n");
+        }
     }
 
     return 0;
@@ -51,28 +55,12 @@ int main()
 
 Output:
 
-Example Output:
+<img width="390" height="715" alt="image" src="https://github.com/user-attachments/assets/4e51806e-ba1c-4664-b214-8e3664369c79" />
 
-Enter Name: Ravi
-
-Enter Age: 20
-
-Vaccine Eligibility: Yes
-
-Name: Ravi
-
-Age: 20
-
-If the age is 6 or below:
-
-Enter Name: Kumar
-
-Enter Age: 5
-
-Vaccine Eligibility: No
 
 
 Result:
+
 Thus, the program is verified successfully. 
 
 
@@ -91,57 +79,44 @@ Algorithm:
 7.	Return 0
  
 Program:
-
-```c
+```
 #include <stdio.h>
-
-struct numbers
-{
-    int a, b, sum;
+struct numbers {
+    int a;
+    int b;
 };
-
-struct numbers add(struct numbers n)
-{
-    n.sum = n.a + n.b;
-    return n;
+struct numbers add(struct numbers n) {
+    struct numbers result;
+    result.a = n.a + n.b;
+    return result;
 }
 
-int main()
-{
-    struct numbers n;
-
-    printf("Enter value of a: ");
+int main() {
+    struct numbers n, sum;
+    printf("Enter the value of a: ");
     scanf("%d", &n.a);
-
-    printf("Enter value of b: ");
+    printf("Enter the value of b: ");
     scanf("%d", &n.b);
-
-    n = add(n);
-
-    printf("Sum = %d", n.sum);
+    sum = add(n);
+    printf("Sum = %d\n", sum.a);
 
     return 0;
 }
-```
 
+```
 
 
 
 Output:
 
+<img width="424" height="202" alt="image" src="https://github.com/user-attachments/assets/9cf2a3d6-9e21-439e-adb4-65b6ec91b778" />
 
-Example Output:
-
-Enter value of a: 10
-
-Enter value of b: 20
-
-Sum = 30
 
 
 
 
 Result:
+
 Thus, the program is verified successfully
 
 
@@ -169,58 +144,32 @@ Use scanf to input the file name into the name array.
 5.	Return 0 to indicate successful program execution.
  
 Program:
-
-```c
-#include <stdio.h>
-
-int main()
-{
-    FILE *p;
-    char name[50];
-
-    printf("Enter the file name: ");
-    scanf("%s", name);
-
-    printf("File %s created successfully\n", name);
-
-    p = fopen(name, "w");
-
-    if(p == NULL)
-    {
-        printf("Error in opening file");
-        return 1;
-    }
-
-    printf("File opened successfully\n");
-
-    fclose(p);
-
-    printf("File closed successfully");
-
-    return 0;
-}
 ```
+#include <stdio.h>
+ int main()
+ {
+    FILE *fp;
+    char fn[20];
+    scanf("%s",fn);
+    fp=fopen(fn,"w");
+    if(fp!=NULL)
+    {
+        printf("%s File Created Successfully\n",fn);
+        printf("%s File Opened\n",fn);
+    }
+    fclose(fp);
+    printf("%s File Closed",fn);
+    
+    return 0;
+ }
 
-
+```
 
 
 Output:
 
 
-Example Output:
-
-Enter the file name: student.txt
-
-File student.txt created success
-
-fully
-
-File opened successfully
-
-File closed successfully
-
-
-
+<img width="455" height="166" alt="image" src="https://github.com/user-attachments/assets/0b5aacba-f2f7-4101-97dd-9be2927efc59" />
 
 
 
@@ -230,6 +179,7 @@ File closed successfully
 
 
 Result:
+
 Thus, the program is verified successfully
  
 
@@ -255,68 +205,39 @@ Use scanf to input the file name into the name array and the number of strings i
 5.	Return 0 to indicate successful program execution.
  
 Program:
-
-```c
+```
 #include <stdio.h>
-
-int main()
-{
-    FILE *p;
-    char name[50], text[100];
-    int num, i;
-
-    printf("Enter the file name: ");
-    scanf("%s", name);
-
-    printf("Enter number of strings: ");
-    scanf("%d", &num);
-
-    p = fopen(name, "w");
-
-    if(p == NULL)
+ int main()
+ {
+    FILE *fp;
+    char fn[20];
+    int users;
+    scanf("%s",fn);
+    fp=fopen(fn,"w");
+    if(fp!=NULL)
     {
-        printf("Error in opening file");
-        return 1;
+        printf("%s Opened\n",fn);
     }
-
-    printf("File opened successfully\n");
-
-    getchar();
-
-    for(i = 0; i < num; i++)
+    scanf("%d",&users);
+    char data[100];
+    for(int i=0;i<users;i++)
     {
-        printf("Enter text %d: ", i + 1);
-        fgets(text, sizeof(text), stdin);
-        fputs(text, p);
+        scanf("%s",data);
+        fprintf(fp,"%s\n",data);
     }
-
-    fclose(p);
-
-    printf("Data added successfully");
-
+    fclose(fp);
+    printf("Data added Successfully");
     return 0;
-}
+ }
+
 ```
 
 
 
 Output:
 
-Example Output:
+<img width="403" height="208" alt="image" src="https://github.com/user-attachments/assets/e9914b94-327c-447b-9090-e16d0a6034a5" />
 
-Enter the file name: sample.txt
-
-Enter number of strings: 3
-
-File opened successfully
-
-Enter text 1: Welcome
-
-Enter text 2: To C Programming
-
-Enter text 3: File Handling
-
-Data added successfully
 
 
 
@@ -324,6 +245,7 @@ Data added successfully
 
 
 Result:
+
 Thus, the program is verified successfully
 
 
@@ -361,96 +283,57 @@ Algorithm:
 13.End the program by returning 0.
 
 Program:
-
-```c
+```
 #include <stdio.h>
 #include <stdlib.h>
-
-struct subject
-{
+struct subject {
     char name[50];
     int marks;
 };
 
-int main()
-{
+int main() {
     int n, i;
-
-    printf("Enter number of subjects: ");
-    scanf("%d", &n);
-
     struct subject *s;
-
+    printf("Enter the number of subjects: ");
+    scanf("%d", &n);
+    
     s = (struct subject *)malloc(n * sizeof(struct subject));
-
-    if(s == NULL)
-    {
-        printf("Memory allocation failed");
-        return 1;
+    
+    if (s == NULL) {
+       printf("Memory allocation failed!\n");
+       return 1;
     }
-
-    for(i = 0; i < n; i++)
-    {
-        printf("Enter subject name: ");
+    for (i = 0; i < n; i++){
+        printf("\nEnter name of subject %d: ", i+1);
         scanf("%s", s[i].name);
-
-        printf("Enter marks: ");
+        printf("Enter marks for %s: ",s[i].name);
         scanf("%d", &s[i].marks);
-    }
-
-    printf("\nStudent Details\n");
-
-    for(i = 0; i < n; i++)
-    {
-        printf("Subject Name: %s\n", s[i].name);
-        printf("Marks: %d\n", s[i].marks);
-    }
-
-    free(s);
-
-    return 0;
 }
-
-
+printf("\nSubject Details:\n");
+for (i = 0; i < n; i++) {
+    printf("Subject: %s, Marks: %d\n", s[i].name, s[i].marks);
+}
+free(s);
+return 0;
+}
 ```
+
+
+
+
 
 Output:
 
 
-Example Output:
-
-Enter number of subjects: 3
-
-Enter subject name: Maths
-
-Enter marks: 95
-
-Enter subject name: Physics
-
-Enter marks: 88
-
-Enter subject name: Chemistry
-
-Enter marks: 91
+<img width="636" height="498" alt="image" src="https://github.com/user-attachments/assets/091f0842-dd54-4e88-8187-54837ef1bb8e" />
 
 
-Student Details
 
-Subject Name: Maths
-
-Marks: 95
-
-Subject Name: Physics
-
-Marks: 88
-
-Subject Name: Chemistry
-
-Marks: 91
 
 
 
 
 
 Result:
+
 Thus, the program is verified successfully
